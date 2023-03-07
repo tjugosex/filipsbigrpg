@@ -25,8 +25,13 @@ public class shooting : MonoBehaviour
 
     void ShootProjectile(Vector3 direction)
     {
+        
         // Create a new instance of the projectile prefab
         GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+
+        // Rotate the projectile to face the mouse direction
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        projectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         // Set the velocity of the projectile
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
