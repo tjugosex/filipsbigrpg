@@ -151,4 +151,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 7308324816863756662, guid: f1d34cdb27a6e1d4cb0141bdeb671dbf, type: 3}
-  projectileSpeed: 10
+  projectileSpeed: 20
