@@ -9,7 +9,7 @@ public class modulespawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float spawncord = (modulesnmbr -1) * -50;
+        float spawncord = (modulesnmbr - 1) * -50;
         float spawnx = spawncord;
         float spawny = spawncord;
 
@@ -17,7 +17,7 @@ public class modulespawner : MonoBehaviour
         {
             for (int k = 0; k < modulesnmbr; k++)
             {
-                
+
                 Instantiate(moduleprefab, new Vector3(spawnx, spawny, 20), Quaternion.identity);
                 spawnx += 100;
             }
