@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class modulespawner : MonoBehaviour
 {
-    public float modulesnmbr = 5;
+    public float modulesnmbr = 20;
     public GameObject moduleprefab;
     // Start is called before the first frame update
     void Start()
@@ -20,6 +20,7 @@ public class modulespawner : MonoBehaviour
 
                 GameObject module = Instantiate(moduleprefab, new Vector3(spawnx, spawny, 20), Quaternion.identity);
                 module.transform.parent = this.transform;
+                module.GetComponent<spawner>().id = i;
                 spawnx += 100;
             }
             spawnx = spawncord;
