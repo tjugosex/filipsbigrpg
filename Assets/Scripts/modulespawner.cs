@@ -18,7 +18,8 @@ public class modulespawner : MonoBehaviour
             for (int k = 0; k < modulesnmbr; k++)
             {
 
-                Instantiate(moduleprefab, new Vector3(spawnx, spawny, 20), Quaternion.identity);
+                GameObject module = Instantiate(moduleprefab, new Vector3(spawnx, spawny, 20), Quaternion.identity);
+                module.transform.parent = this.transform;
                 spawnx += 100;
             }
             spawnx = spawncord;
