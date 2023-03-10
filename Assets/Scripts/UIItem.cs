@@ -33,22 +33,27 @@ public class UIItem : MonoBehaviour, IPointerClickHandler
 
     }
 
+    
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(this.item != null)
+        // Check if the click was outside of the inventory
+        
+        if (this.item != null)
         {
-            if(selectedItem.item != null)
+            if (selectedItem.item != null)
             {
                 Item clone = new Item(selectedItem.item);
                 selectedItem.UpdateItem(this.item);
                 UpdateItem(clone);
             }
-            else{
+            else
+            {
                 selectedItem.UpdateItem(this.item);
                 UpdateItem(null);
             }
         }
-        else if(selectedItem.item != null)
+        else if (selectedItem.item != null)
         {
             UpdateItem(selectedItem.item);
             selectedItem.UpdateItem(null);

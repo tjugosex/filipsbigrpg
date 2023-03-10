@@ -8,6 +8,8 @@ public class Inventory : MonoBehaviour
     public ItemDatabase ItemDatabase;
     public UIInventory inventoryUI;
 
+    public int nmbrofitems = 0;
+
     private void Start()
     {
         GiveItem(0);
@@ -16,6 +18,7 @@ public class Inventory : MonoBehaviour
     }
 
     public void GiveItem(int id){
+        nmbrofitems++;
         Item itemToAdd = ItemDatabase.GetItem(id);
         characterItems.Add(itemToAdd);
         inventoryUI.AddNewItem(itemToAdd);
@@ -31,6 +34,7 @@ public class Inventory : MonoBehaviour
         Item itemToRemove = CheckForItem(id);
         if (itemToRemove != null)
         {
+            nmbrofitems--;
             characterItems.Remove(itemToRemove);
             inventoryUI.RemoveNewItem(itemToRemove);
             Debug.Log("Item removed: " + itemToRemove.title);
