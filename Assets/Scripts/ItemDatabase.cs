@@ -22,7 +22,7 @@ public class ItemDatabase : MonoBehaviour
     void BuildDatabase()
     {
         items = new List<Item>(){
-            new Item(0,"Coins", "monei", new Dictionary<string, int>{
+            new Item(0,"Coin", "monei", new Dictionary<string, int>{
                 {"Value", 1}
             }),
             new Item(1,"Fireball Staff", "Ball of fireball of staff :)", new Dictionary<string, int>{
