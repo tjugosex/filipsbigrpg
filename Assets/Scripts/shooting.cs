@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class shooting : MonoBehaviour
 {
@@ -28,19 +30,36 @@ public class shooting : MonoBehaviour
         }
 
         // If the player clicks the mouse button, shoot a projectile
-        if (!invOpen)
+        if (!IsPointerOverUIElement() && Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                ShootProjectile(shootDirection);
-            }
+            ShootProjectile(shootDirection);
         }
-        
+
+        bool IsPointerOverUIElement()
+        {
+            PointerEventData eventData = new PointerEventData(EventSystem.current);
+            eventData.position = Input.mousePosition;
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, results);
+            foreach (RaycastResult result in results)
+            {
+                if (result.gameObject.name == "InventoryPanel")
+                {
+                    return true;
+                }
+                else if (result.gameObject.name == "StavUI")
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 
     void ShootProjectile(Vector3 direction)
     {
-        
+
         // Create a new instance of the projectile prefab
         GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         projectile.transform.parent = this.transform;

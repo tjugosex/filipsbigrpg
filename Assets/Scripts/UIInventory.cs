@@ -16,8 +16,16 @@ public class UIInventory : MonoBehaviour
             GameObject instance = Instantiate(slotPrefab);
             instance.transform.SetParent(slotPanel);
             uIItems.Add(instance.GetComponentInChildren<UIItem>());
-            if (i == numberOfSlots - 1)
-            {
+            
+        }
+
+        for (int i = 0; i < 4; i++)
+        {
+            Vector3 position = new Vector3(715f + i*75, 310f, 0f);
+            GameObject instance = Instantiate(slotPrefab, position, Quaternion.identity);
+            instance.transform.SetParent(transform);
+            uIItems.Add(instance.GetComponentInChildren<UIItem>());
+            if (i == 3){
                 instance.SetActive(false);
             }
         }

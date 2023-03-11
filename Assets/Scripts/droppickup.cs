@@ -19,7 +19,7 @@ public class droppickup : MonoBehaviour
         if (playerInRange && Input.GetKeyDown(KeyCode.E))
         {
             Inventory inventory = player.GetComponent<Inventory>();
-            if (inventory.nmbrofitems < 16)
+            if (inventory.nmbrofitems < 19)
             {
                 Destroy(gameObject);
 
