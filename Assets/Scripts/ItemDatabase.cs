@@ -6,7 +6,8 @@ public class ItemDatabase : MonoBehaviour
 {
     public List<Item> items = new List<Item>();
 
-    public void Awake(){
+    public void Awake()
+    {
         BuildDatabase();
     }
 
@@ -26,17 +27,17 @@ public class ItemDatabase : MonoBehaviour
                 {"Value", 1}
             }),
             new Item(1,"Fireball Staff", "Ball of fireball of staff :)", new Dictionary<string, int>{
-                {"Type", 0},
+
                 {"Power", 1}
             }),
             new Item(2,"Waterball Staff", "Ball of waterball of staff :)", new Dictionary<string, int>{
-                {"Type", 1},
+
                 {"Power", 1}
             })
-            
-            
-            
-            
+
+
+
+
         };
 
     }

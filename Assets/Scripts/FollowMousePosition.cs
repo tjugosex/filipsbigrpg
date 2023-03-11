@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FollowMousePosition : MonoBehaviour
 {
-    void Update(){
+    void LateUpdate(){
         transform.position = Input.mousePosition;
     }
 }
