@@ -38,6 +38,8 @@ public class Inventory : MonoBehaviour
             nmbrofitems--;
             characterItems.Remove(itemToRemove);
             inventoryUI.RemoveNewItem(itemToRemove);
+            
+            
             Debug.Log("Item removed: " + itemToRemove.title);
             Instantiate(dropPrefab, transform.position, Quaternion.identity);
         }

@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class UIInventory : MonoBehaviour
 {
-    public List<UIItem> uIItems = new List<UIItem>();
+    public List<UIItem> uIItems = new List<UIItem>(new UIItem[19]);
     public GameObject slotPrefab;
     public Transform slotPanel;
     public int numberOfSlots = 16;
 
-    private void Awake(){
-        for(int i = 0; i < numberOfSlots; i++){
+    private void Awake()
+    {
+        for (int i = 0; i < numberOfSlots; i++)
+        {
             GameObject instance = Instantiate(slotPrefab);
             instance.transform.SetParent(slotPanel);
             uIItems.Add(instance.GetComponentInChildren<UIItem>());
+            if (i == numberOfSlots - 1)
+            {
+                instance.SetActive(false);
+            }
         }
-        
+
     }
 
     public void UpdateSlot(int slot, Item item)

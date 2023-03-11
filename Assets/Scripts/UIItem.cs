@@ -81,6 +81,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
 
             if (this.item != null)
             {
+                
                 inventory.RemoveItem(this.item.id);
                 UpdateItem(null);
                 

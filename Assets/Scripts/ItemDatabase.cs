@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class ItemDatabase : MonoBehaviour
 {
-    public List<Item> items = new List<Item>();
+    public List<Item> items = new List<Item>(new Item[19]);
+
 
     public void Awake()
     {
+        for (int i = 0; i < items.Count; i++)
+        {
+            items[i] = null;
+        }
         BuildDatabase();
     }
 
