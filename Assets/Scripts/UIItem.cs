@@ -37,7 +37,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(this.item != null)
+        if (this.item != null)
         {
             tooltip.GenerateToolTip(this.item);
         }
@@ -73,6 +73,19 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
                 UpdateItem(selectedItem.item);
                 selectedItem.UpdateItem(null);
             }
+        }
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            GameObject playerObject = GameObject.Find("player");
+            Inventory inventory = playerObject.GetComponent<Inventory>();
+
+            if (this.item != null)
+            {
+                inventory.RemoveItem(this.item.id);
+                UpdateItem(null);
+                
+            }
+
         }
     }
 

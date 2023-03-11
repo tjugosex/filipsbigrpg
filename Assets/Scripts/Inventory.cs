@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour
     public UIInventory inventoryUI;
 
     public int nmbrofitems = 0;
+    public GameObject dropPrefab;
 
     private void Start()
     {
@@ -38,6 +39,7 @@ public class Inventory : MonoBehaviour
             characterItems.Remove(itemToRemove);
             inventoryUI.RemoveNewItem(itemToRemove);
             Debug.Log("Item removed: " + itemToRemove.title);
+            Instantiate(dropPrefab, transform.position, Quaternion.identity);
         }
     }
 }

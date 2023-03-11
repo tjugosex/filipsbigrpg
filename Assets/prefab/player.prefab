@@ -165,4 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01c49582b020e264b8b8f652829d0b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemDatabase: {fileID: 3637845419685662721, guid: 452ff130e282c584eb47eacffa483bfe, type: 3}
+  ItemDatabase: {fileID: 0}
+  inventoryUI: {fileID: 0}
+  nmbrofitems: 0
+  dropPrefab: {fileID: 5203448226278371980, guid: bc3eb7ddc49c1d44f85ea2fd00de84e1, type: 3}
