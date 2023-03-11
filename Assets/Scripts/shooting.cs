@@ -6,6 +6,11 @@ public class shooting : MonoBehaviour
 {
     public GameObject projectilePrefab;
     public float projectileSpeed = 10f;
+    bool invOpen;
+    private void Start()
+    {
+        invOpen = false;
+    }
 
     void Update()
     {
@@ -16,11 +21,21 @@ public class shooting : MonoBehaviour
         // Calculate the direction from the player to the mouse
         Vector3 shootDirection = (mousePos - transform.position).normalized;
 
-        // If the player clicks the mouse button, shoot a projectile
-        if (Input.GetMouseButtonDown(0))
+
+        if (Input.GetKeyDown("c"))
         {
-            ShootProjectile(shootDirection);
+            invOpen = !invOpen;
         }
+
+        // If the player clicks the mouse button, shoot a projectile
+        if (!invOpen)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                ShootProjectile(shootDirection);
+            }
+        }
+        
     }
 
     void ShootProjectile(Vector3 direction)
@@ -28,6 +43,7 @@ public class shooting : MonoBehaviour
         
         // Create a new instance of the projectile prefab
         GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        projectile.transform.parent = this.transform;
 
         // Rotate the projectile to face the mouse direction
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
