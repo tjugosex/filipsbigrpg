@@ -8,38 +8,66 @@ public class UIInventory : MonoBehaviour
     public GameObject slotPrefab;
     public Transform slotPanel;
     public int numberOfSlots = 16;
+    private int itemCounter = 0;
 
     private void Awake()
     {
-        for (int i = 0; i < numberOfSlots; i++)
+
+
+        for (int i = 0; i < numberOfSlots + 1; i++)
         {
             GameObject instance = Instantiate(slotPrefab);
             instance.transform.SetParent(slotPanel);
+            instance.name = "slot" + (i + 3);
+            Transform child = instance.transform.Find("Item");
+            child.name = "Item" + (i + 3);
             uIItems.Add(instance.GetComponentInChildren<UIItem>());
-            
-        }
-
-        for (int i = 0; i < 4; i++)
-        {
-            Vector3 position = new Vector3(715f + i*75, 310f, 0f);
-            GameObject instance = Instantiate(slotPrefab, position, Quaternion.identity);
-            instance.transform.SetParent(transform);
-            uIItems.Add(instance.GetComponentInChildren<UIItem>());
-            if (i == 3){
+            if (i == numberOfSlots)
+            {
                 instance.SetActive(false);
             }
+
         }
+        for (int i = 0; i < 3; i++)
+        {
+            Vector3 position = new Vector3(transform.position.x + i * 75f - 75,transform.position.y + 90f, 0f);
+            GameObject instance = Instantiate(slotPrefab, position, Quaternion.identity);
+            instance.transform.SetParent(transform);
+            instance.name = "slot" + i;
+            Transform child = instance.transform.Find("Item");
+            child.name = "Item" + i;
+            uIItems.Add(instance.GetComponentInChildren<UIItem>());
+
+        }
+
 
     }
 
+
     public void UpdateSlot(int slot, Item item)
     {
+
+
         uIItems[slot].UpdateItem(item);
     }
 
     public void AddNewItem(Item item)
     {
-        UpdateSlot(uIItems.FindIndex(i => i.item == null), item);
+        int slotIndex;
+
+        if (itemCounter < 3)
+        {
+            // Place items at slots 17, 18, and 19 for the first three calls
+            slotIndex = 17 + itemCounter;
+        }
+        else
+        {
+            // Use the default behavior for subsequent calls
+            slotIndex = uIItems.FindIndex(i => i.item == null);
+        }
+
+        UpdateSlot(slotIndex, item);
+        itemCounter++;
     }
 
     public void RemoveNewItem(Item item)

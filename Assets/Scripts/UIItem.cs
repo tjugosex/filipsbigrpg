@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Item item;
-    private Image spriteImage;
+    public Image spriteImage;
     private UIItem selectedItem;
     private Tooltip tooltip;
 
@@ -16,6 +16,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         spriteImage = GetComponent<Image>();
         UpdateItem(null);
         selectedItem = GameObject.Find("SelectedItem").GetComponent<UIItem>();
+
         tooltip = GameObject.Find("Tooltip").GetComponent<Tooltip>();
     }
 
@@ -30,6 +31,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         else
         {
             spriteImage.color = Color.clear;
+            
         }
 
 
@@ -52,12 +54,36 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         // Check if the click was outside of the inventory
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-
+            string prefabName = gameObject.name;
+            if (selectedItem.item != null)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    if (selectedItem.item.title == "Coin" && prefabName == "Item" + i)
+                    {
+                        Debug.Log("wut");
+                        return;
+                    }
+                }
+            }
 
             if (this.item != null)
             {
+
+
+                //Debug.Log(this.item.title);
                 if (selectedItem.item != null)
                 {
+
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (selectedItem.item.title == "Coin" && prefabName == "Item" + i)
+                        {
+                            Debug.Log("wut");
+                            return;
+                        }
+                    }
+
                     Item clone = new Item(selectedItem.item);
                     selectedItem.UpdateItem(this.item);
                     UpdateItem(clone);
@@ -81,10 +107,10 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
 
             if (this.item != null)
             {
-                
+
                 inventory.RemoveItem(this.item.id);
                 UpdateItem(null);
-                
+
             }
 
         }

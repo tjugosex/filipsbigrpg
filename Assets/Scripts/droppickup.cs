@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using UnityEngine.UI;
 
 public class droppickup : MonoBehaviour
 {
@@ -15,21 +17,39 @@ public class droppickup : MonoBehaviour
     void Update()
     {
         GameObject player = GameObject.Find("player");
+        Inventory inventory = player.GetComponent<Inventory>();
+
         // Check if the player is in range and presses the "E" key
         if (playerInRange && Input.GetKeyDown(KeyCode.E))
         {
-            Inventory inventory = player.GetComponent<Inventory>();
-            if (inventory.nmbrofitems < 19)
+            bool hasMissingImage = false;
+            for (int i = 3; i <= 18; i++)
             {
-                Destroy(gameObject);
-
-                // Check if the inventory component exists
-                if (inventory != null)
+                string objectName = "Item" + i;
+                GameObject item = GameObject.Find(objectName);
+                if (item != null && item.GetComponent<Image>() != null && (item.GetComponent<Image>().sprite == null || item.GetComponent<Image>().color == Color.clear))
                 {
-                    // Give the player the specified item
-                    inventory.GiveItem(itemID);
+                    hasMissingImage = true;
+                    Debug.Log(item.GetComponent<Image>().sprite);
+                    break;
+                    
                 }
             }
+            if (hasMissingImage)
+            {
+                {
+                    Destroy(gameObject);
+
+                    // Check if the inventory component exists
+                    if (inventory != null)
+                    {
+                        // Give the player the specified item
+                        inventory.GiveItem(itemID);
+                    }
+                }
+            }
+
+            
         }
     }
 

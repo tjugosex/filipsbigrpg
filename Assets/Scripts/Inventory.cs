@@ -4,31 +4,76 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public List<Item> characterItems = new List<Item>();
+    public List<Item> characterItems = new List<Item>(20);
     public ItemDatabase ItemDatabase;
     public UIInventory inventoryUI;
-
+    private int startItemCount = 0;
     public int nmbrofitems = 0;
     public GameObject dropPrefab;
 
     private void Start()
     {
-        GiveItem(0);
-        GiveItem(1);
-        GiveItem(2);
+        GiveStartItem(1);
+        GiveStartItem(1);
+        GiveStartItem(1);
     }
 
-    public void GiveItem(int id){
+
+    public void GiveItem(int id)
+    {
         nmbrofitems++;
         Item itemToAdd = ItemDatabase.GetItem(id);
+        int insertIndex = -1;
+        for (int i = 3; i < 20; i++)
+        {
+            if (i >= characterItems.Count || characterItems[i] == null)
+            {
+                insertIndex = i;
+                break;
+            }
+        }
+        if (insertIndex != -1)
+        {
+            characterItems.Insert(insertIndex, itemToAdd);
+            inventoryUI.AddNewItem(itemToAdd);
+            Debug.Log("Added item " + itemToAdd.title + " at position " + insertIndex + ".");
+        }
+        else
+        {
+            Debug.Log("Could not add item " + itemToAdd.title + " - inventory is full.");
+        }
+
+    }
+    public void GiveStartItem(int id)
+{
+    Item itemToAdd = ItemDatabase.GetItem(id);
+    int startingIndex = 17;
+    
+    if (characterItems.Count < startingIndex + 3)
+    {
+        // Add the item to the end of the list if there are not enough positions available.
         characterItems.Add(itemToAdd);
         inventoryUI.AddNewItem(itemToAdd);
         Debug.Log("Added item: " + itemToAdd.title);
     }
+    else
+    {
+        // Insert the item at the specified position.
+        characterItems.Insert(startingIndex, itemToAdd);
+        inventoryUI.AddNewItem(itemToAdd);
+        Debug.Log("Added item: " + itemToAdd.title + " at position " + startingIndex);
+    }
+}
 
-    public Item CheckForItem(int id){
+    public Item CheckForItem(int id)
+    {
         return characterItems.Find(item => item.id == id);
     }
+    public Item CheckForItem(string title)
+    {
+        return characterItems.Find(item => item.title == title);
+    }
+
 
     public void RemoveItem(int id)
     {
@@ -38,8 +83,8 @@ public class Inventory : MonoBehaviour
             nmbrofitems--;
             characterItems.Remove(itemToRemove);
             inventoryUI.RemoveNewItem(itemToRemove);
-            
-            
+
+
             Debug.Log("Item removed: " + itemToRemove.title);
             Instantiate(dropPrefab, transform.position, Quaternion.identity);
         }
