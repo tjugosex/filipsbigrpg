@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6619509207299614486}
   - component: {fileID: 7370650574046600787}
   - component: {fileID: 5626017640903800426}
+  - component: {fileID: 4433419877270380997}
   m_Layer: 0
   m_Name: tree
   m_TagString: Untagged
@@ -136,3 +137,18 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4433419877270380997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5144066837894579088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0670cac791b64214ca52eeec70347052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 2
+  Unwanted: 
+  Positions: []

@@ -254,6 +254,7 @@ MonoBehaviour:
   - {fileID: 5144066837894579088, guid: 49913fd5cca959e40890dbaf11b6953f, type: 3}
   player: {fileID: 187659720}
   currentPos: {x: 0, y: 0}
+  Test: {x: 0, y: 0}
 --- !u!4 &1844127574
 Transform:
   m_ObjectHideFlags: 0
@@ -283,6 +284,10 @@ PrefabInstance:
     - target: {fileID: 7523922414569568195, guid: b7d3f1fbd8af5cf4cab586e4c9fa1bb2, type: 3}
       propertyPath: m_Name
       value: player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871513644982770889, guid: b7d3f1fbd8af5cf4cab586e4c9fa1bb2, type: 3}
+      propertyPath: runSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8660149070940635405, guid: b7d3f1fbd8af5cf4cab586e4c9fa1bb2, type: 3}
       propertyPath: m_RootOrder
