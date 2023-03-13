@@ -33,12 +33,16 @@ public class ItemDatabase : MonoBehaviour
             }),
             new Item(1,"FireNode", "", new Dictionary<string, int>{
 
-                {"Power", 2}
+                {"Power", 3}
             }),
             new Item(2,"WaterNode", "", new Dictionary<string, int>{
 
                 {"Power", 1}, {"Range", 1}
-            })
+            }),
+            new Item(3,"NatureNode", "", new Dictionary<string, int>{
+
+                {"Power", 1}, {"Projectiles", 1}
+            }),
 
 
 

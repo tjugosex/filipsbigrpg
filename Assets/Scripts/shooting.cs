@@ -10,7 +10,10 @@ public class shooting : MonoBehaviour
     public float projectileSpeed = 10f;
     bool invOpen;
     private Inventory inventory;
+    
     private int power = 1;
+    private int projectilesnmbr = 1;
+    private float[] degrees = new float [7]{0,10,-10,20,-20,30,-30};
     private float cooldown = 1.0f;
     private float cooldownTimer = 0.0f;
     private int range = 0;
@@ -105,6 +108,10 @@ public class shooting : MonoBehaviour
                             {
                                 range += kvp.Value;
                             }
+                            if (kvp.Key == "Projectiles")
+                            {
+                                projectilesnmbr += kvp.Value;
+                            }
                         }
 
                     }
@@ -123,21 +130,30 @@ public class shooting : MonoBehaviour
                 Debug.Log(gameObjectName + " not found.");
             }
         }
-        // Create a new instance of the projectile prefab
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        projectile.transform.parent = this.transform;
+        for (int i = 0; i < projectilesnmbr; i++)
+        {
+            GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            projectile.transform.parent = this.transform;
 
-        // Rotate the projectile to face the mouse direction
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        projectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            // Calculate the rotation angle for this projectile
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + i * 100f;
 
-        // Set the velocity of the projectile
-        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-        projectile.GetComponent<Projectile>().duration += range;
-        rb.velocity = direction * projectileSpeed;
+            // Rotate the projectile to face the calculated angle
+            projectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+            // Set the velocity of the projectile
+            Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+
+            projectile.GetComponent<Projectile>().duration += range;
+
+            Vector2 rotatedDirection = Quaternion.Euler(0, 0, degrees[i]) * direction;
+            rb.velocity = rotatedDirection * projectileSpeed;
+
+        }
         Debug.Log("total power: " + power);
         Debug.Log("total range: " + range);
         power = 1;
         range = 0;
+        projectilesnmbr = 1;
     }
 }

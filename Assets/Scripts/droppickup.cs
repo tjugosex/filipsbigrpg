@@ -46,7 +46,7 @@ public class droppickup : MonoBehaviour
                     {
                         if (newItem)
                         {
-                            itemID = Random.Range(0, 3);
+                            itemID = Random.Range(0, 4);
                         }
 
                         // Give the player the specified item
