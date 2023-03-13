@@ -10,6 +10,10 @@ public class shooting : MonoBehaviour
     public float projectileSpeed = 10f;
     bool invOpen;
     private Inventory inventory;
+    private int power = 1;
+    private float cooldown = 1.0f;
+    private float cooldownTimer = 0.0f;
+    private int range = 0;
     private void Start()
     {
         invOpen = false;
@@ -37,7 +41,16 @@ public class shooting : MonoBehaviour
         // If the player clicks the mouse button, shoot a projectile
         if (!IsPointerOverUIElement() && Input.GetMouseButtonDown(0))
         {
-            ShootProjectile(shootDirection);
+            if (cooldownTimer <= 0.0f)
+            {
+                ShootProjectile(shootDirection);
+                cooldownTimer = cooldown;
+            }
+        }
+
+        if (cooldownTimer > 0.0f)
+        {
+            cooldownTimer -= Time.deltaTime;
         }
 
         bool IsPointerOverUIElement()
@@ -72,16 +85,26 @@ public class shooting : MonoBehaviour
             if (slotObject != null)
             {
                 UIItem uiItem = slotObject.GetComponentInChildren<UIItem>();
+
                 if (uiItem != null && uiItem.spriteImage != null)
                 {
                     string spriteName = uiItem.spriteImage.sprite.name;
+
                     Item item = inventory.CheckForItem(spriteName); // Use the CheckForItem method to get the corresponding Item
-                    if (item != null)
+                    if (item != null && uiItem.GetComponentInChildren<Image>().color != Color.clear)
                     {
                         Debug.Log(gameObjectName + " has power: ");
                         foreach (KeyValuePair<string, int> kvp in item.stats)
                         {
                             Debug.Log(kvp.Key + ": " + kvp.Value);
+                            if (kvp.Key == "Power")
+                            {
+                                power += kvp.Value;
+                            }
+                            if (kvp.Key == "Range")
+                            {
+                                range += kvp.Value;
+                            }
                         }
 
                     }
@@ -110,6 +133,11 @@ public class shooting : MonoBehaviour
 
         // Set the velocity of the projectile
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+        projectile.GetComponent<Projectile>().duration += range;
         rb.velocity = direction * projectileSpeed;
+        Debug.Log("total power: " + power);
+        Debug.Log("total range: " + range);
+        power = 1;
+        range = 0;
     }
 }

@@ -20,7 +20,7 @@ public class droppickup : MonoBehaviour
         Inventory inventory = player.GetComponent<Inventory>();
 
         // Check if the player is in range and presses the "E" key
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        if (playerInRange)
         {
             bool hasMissingImage = false;
             for (int i = 3; i <= 18; i++)
@@ -43,6 +43,7 @@ public class droppickup : MonoBehaviour
                     // Check if the inventory component exists
                     if (inventory != null)
                     {
+                        itemID = Random.Range(0,3);
                         // Give the player the specified item
                         inventory.GiveItem(itemID);
                     }

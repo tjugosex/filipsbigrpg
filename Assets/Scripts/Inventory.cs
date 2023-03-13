@@ -10,12 +10,13 @@ public class Inventory : MonoBehaviour
     private int startItemCount = 0;
     public int nmbrofitems = 0;
     public GameObject dropPrefab;
+    public float ydrop = 0;
 
     private void Start()
     {
         GiveStartItem(1);
         GiveStartItem(1);
-        GiveStartItem(1);
+        GiveStartItem(2);
     }
 
 
@@ -24,24 +25,9 @@ public class Inventory : MonoBehaviour
         nmbrofitems++;
         Item itemToAdd = ItemDatabase.GetItem(id);
         int insertIndex = -1;
-        for (int i = 3; i < 20; i++)
-        {
-            if (i >= characterItems.Count || characterItems[i] == null)
-            {
-                insertIndex = i;
-                break;
-            }
-        }
-        if (insertIndex != -1)
-        {
-            characterItems.Insert(insertIndex, itemToAdd);
-            inventoryUI.AddNewItem(itemToAdd);
-            Debug.Log("Added item " + itemToAdd.title + " at position " + insertIndex + ".");
-        }
-        else
-        {
-            Debug.Log("Could not add item " + itemToAdd.title + " - inventory is full.");
-        }
+        characterItems.Add(itemToAdd);
+        inventoryUI.AddNewItem(itemToAdd);
+        Debug.Log("Added item: " + itemToAdd.title);
 
     }
     public void GiveStartItem(int id)
@@ -86,7 +72,7 @@ public class Inventory : MonoBehaviour
 
 
             Debug.Log("Item removed: " + itemToRemove.title);
-            Instantiate(dropPrefab, transform.position, Quaternion.identity);
+            Instantiate(dropPrefab, new Vector2(transform.position.x, transform.position.y +ydrop), Quaternion.identity);
         }
     }
 }

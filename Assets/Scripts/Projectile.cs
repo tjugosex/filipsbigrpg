@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
         duration -= Time.deltaTime;
         if (duration <= 0f)
         {
+           transform.DetachChildren();
             Destroy(gameObject);
         }
     }

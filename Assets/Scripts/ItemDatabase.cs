@@ -31,13 +31,13 @@ public class ItemDatabase : MonoBehaviour
             new Item(0,"Coin", "monei", new Dictionary<string, int>{
                 {"Value", 1}
             }),
-            new Item(1,"Fireball Staff", "Ball of fireball of staff :)", new Dictionary<string, int>{
+            new Item(1,"FireNode", "", new Dictionary<string, int>{
 
-                {"Power", 1}
+                {"Power", 2}
             }),
-            new Item(2,"Waterball Staff", "Ball of waterball of staff :)", new Dictionary<string, int>{
+            new Item(2,"WaterNode", "", new Dictionary<string, int>{
 
-                {"Power", 1}
+                {"Power", 1}, {"Range", 1}
             })
 
 

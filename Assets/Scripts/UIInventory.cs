@@ -13,7 +13,6 @@ public class UIInventory : MonoBehaviour
     private void Awake()
     {
 
-
         for (int i = 0; i < numberOfSlots + 1; i++)
         {
             GameObject instance = Instantiate(slotPrefab);
@@ -30,7 +29,7 @@ public class UIInventory : MonoBehaviour
         }
         for (int i = 0; i < 3; i++)
         {
-            Vector3 position = new Vector3(transform.position.x + i * 75f - 75,transform.position.y + 90f, 0f);
+            Vector3 position = new Vector3(transform.position.x + i * 75f - 75, transform.position.y + 90f, 0f);
             GameObject instance = Instantiate(slotPrefab, position, Quaternion.identity);
             instance.transform.SetParent(transform);
             instance.name = "slot" + i;
@@ -39,10 +38,14 @@ public class UIInventory : MonoBehaviour
             uIItems.Add(instance.GetComponentInChildren<UIItem>());
 
         }
-
+        Transform childTransform = transform.GetChild(3);
+        childTransform.SetAsLastSibling();
 
     }
+    void Update()
+    {
 
+    }
 
     public void UpdateSlot(int slot, Item item)
     {
