@@ -51,6 +51,10 @@ public class ItemDatabase : MonoBehaviour
 
                 
             }),
+            new Item(6,"cowboyhat", "hat", new Dictionary<string, int>{
+
+
+            }),
 
 
 

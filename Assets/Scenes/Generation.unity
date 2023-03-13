@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generating: 1
-  RenderDistance: 3
+  RenderDistance: 2
   moduleprefab: {fileID: 187659713}
   modules:
   - {fileID: 3062243786330920960, guid: dc2b80c889ade6a489c7ce8f3a051d36, type: 3}
@@ -255,6 +255,7 @@ MonoBehaviour:
   - {fileID: 2510870760828836296, guid: 90e47f23622f3ff429b492ad261f3b4a, type: 3}
   player: {fileID: 187659720}
   currentPos: {x: 0, y: 0}
+  modul: {fileID: 5144066837894579088, guid: 136846f3efe24da44980be807e6535e5, type: 3}
   Test: {x: 0, y: 0}
 --- !u!4 &1844127574
 Transform:

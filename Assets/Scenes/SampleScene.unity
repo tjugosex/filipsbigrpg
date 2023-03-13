@@ -1884,6 +1884,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 986721560489051995, guid: b7d3f1fbd8af5cf4cab586e4c9fa1bb2, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 986721560489051995, guid: b7d3f1fbd8af5cf4cab586e4c9fa1bb2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 986721560489051995, guid: b7d3f1fbd8af5cf4cab586e4c9fa1bb2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 986721560489051995, guid: b7d3f1fbd8af5cf4cab586e4c9fa1bb2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 986721560489051995, guid: b7d3f1fbd8af5cf4cab586e4c9fa1bb2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 986721560489051995, guid: b7d3f1fbd8af5cf4cab586e4c9fa1bb2, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1268716948606227198, guid: b7d3f1fbd8af5cf4cab586e4c9fa1bb2, type: 3}
       propertyPath: ydrop
       value: 1
@@ -1900,6 +1924,10 @@ PrefabInstance:
       propertyPath: itemDatabase
       value: 
       objectReference: {fileID: 1645766420}
+    - target: {fileID: 1972691669987739410, guid: b7d3f1fbd8af5cf4cab586e4c9fa1bb2, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7523922414569568195, guid: b7d3f1fbd8af5cf4cab586e4c9fa1bb2, type: 3}
       propertyPath: m_Name
       value: player
