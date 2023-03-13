@@ -31,25 +31,25 @@ public class Inventory : MonoBehaviour
 
     }
     public void GiveStartItem(int id)
-{
-    Item itemToAdd = ItemDatabase.GetItem(id);
-    int startingIndex = 17;
-    
-    if (characterItems.Count < startingIndex + 3)
     {
-        // Add the item to the end of the list if there are not enough positions available.
-        characterItems.Add(itemToAdd);
-        inventoryUI.AddNewItem(itemToAdd);
-        Debug.Log("Added item: " + itemToAdd.title);
+        Item itemToAdd = ItemDatabase.GetItem(id);
+        int startingIndex = 17;
+
+        if (characterItems.Count < startingIndex + 3)
+        {
+            // Add the item to the end of the list if there are not enough positions available.
+            characterItems.Add(itemToAdd);
+            inventoryUI.AddNewItem(itemToAdd);
+            Debug.Log("Added item: " + itemToAdd.title);
+        }
+        else
+        {
+            // Insert the item at the specified position.
+            characterItems.Insert(startingIndex, itemToAdd);
+            inventoryUI.AddNewItem(itemToAdd);
+            Debug.Log("Added item: " + itemToAdd.title + " at position " + startingIndex);
+        }
     }
-    else
-    {
-        // Insert the item at the specified position.
-        characterItems.Insert(startingIndex, itemToAdd);
-        inventoryUI.AddNewItem(itemToAdd);
-        Debug.Log("Added item: " + itemToAdd.title + " at position " + startingIndex);
-    }
-}
 
     public Item CheckForItem(int id)
     {
@@ -72,7 +72,9 @@ public class Inventory : MonoBehaviour
 
 
             Debug.Log("Item removed: " + itemToRemove.title);
-            Instantiate(dropPrefab, new Vector2(transform.position.x, transform.position.y +ydrop), Quaternion.identity);
+            GameObject drop = Instantiate(dropPrefab, new Vector2(transform.position.x, transform.position.y + ydrop), Quaternion.identity);
+            drop.GetComponent<droppickup>().itemID = itemToRemove.id;
+            drop.GetComponent<droppickup>().newItem = false;
         }
     }
 }

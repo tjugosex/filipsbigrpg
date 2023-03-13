@@ -8,6 +8,7 @@ public class droppickup : MonoBehaviour
 {
     // ID of the item to give the player
     public int itemID = 0;
+    public bool newItem = true;
     public GameObject player;
     // Runs when a collision occurs with the player object
     // Set this variable to true when the player is within range
@@ -32,7 +33,7 @@ public class droppickup : MonoBehaviour
                     hasMissingImage = true;
                     Debug.Log(item.GetComponent<Image>().sprite);
                     break;
-                    
+
                 }
             }
             if (hasMissingImage)
@@ -43,14 +44,18 @@ public class droppickup : MonoBehaviour
                     // Check if the inventory component exists
                     if (inventory != null)
                     {
-                        itemID = Random.Range(0,3);
+                        if (newItem)
+                        {
+                            itemID = Random.Range(0, 3);
+                        }
+
                         // Give the player the specified item
                         inventory.GiveItem(itemID);
                     }
                 }
             }
 
-            
+
         }
     }
 
