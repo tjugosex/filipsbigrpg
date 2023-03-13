@@ -13,15 +13,15 @@ public class UIInventory : MonoBehaviour
     private void Awake()
     {
 
-        for (int i = 0; i < numberOfSlots + 1; i++)
+        for (int i = 5; i < numberOfSlots + 6; i++)
         {
             GameObject instance = Instantiate(slotPrefab);
             instance.transform.SetParent(slotPanel);
-            instance.name = "slot" + (i + 3);
+             instance.name = "slot" + i;
             Transform child = instance.transform.Find("Item");
-            child.name = "Item" + (i + 3);
+            child.name = "Item" + i;
             uIItems.Add(instance.GetComponentInChildren<UIItem>());
-            if (i == numberOfSlots)
+            if (i == 21)
             {
                 instance.SetActive(false);
             }
@@ -38,8 +38,21 @@ public class UIInventory : MonoBehaviour
             uIItems.Add(instance.GetComponentInChildren<UIItem>());
 
         }
-        Transform childTransform = transform.GetChild(3);
-        childTransform.SetAsLastSibling();
+        for (int i = 3; i < 5; i++)
+        {
+            Vector3 position = new Vector3(transform.position.x - 156, transform.position.y + 90f * (i-3) -25, 0f);
+            GameObject instance = Instantiate(slotPrefab, position, Quaternion.identity);
+            instance.transform.SetParent(transform);
+            instance.name = "slot" + i;
+            Transform child = instance.transform.Find("Item");
+            child.name = "Item" + i;
+            uIItems.Add(instance.GetComponentInChildren<UIItem>());
+
+        }
+        Transform childTransform1 = transform.GetChild(2);
+        childTransform1.SetAsLastSibling();
+        Transform childTransform2 = transform.GetChild(2);
+        childTransform2.SetAsLastSibling();
 
     }
     void Update()
@@ -58,7 +71,7 @@ public class UIInventory : MonoBehaviour
     {
         int slotIndex;
 
-        if (itemCounter < 3)
+        if (itemCounter < 5)
         {
             // Place items at slots 17, 18, and 19 for the first three calls
             slotIndex = 17 + itemCounter;

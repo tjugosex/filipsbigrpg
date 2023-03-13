@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemDatabase : MonoBehaviour
 {
-    public List<Item> items = new List<Item>(new Item[19]);
+    public List<Item> items = new List<Item>(new Item[25]);
 
 
     public void Awake()
@@ -28,20 +28,28 @@ public class ItemDatabase : MonoBehaviour
     void BuildDatabase()
     {
         items = new List<Item>(){
-            new Item(0,"Coin", "monei", new Dictionary<string, int>{
+            new Item(0,"Coin", "coin", new Dictionary<string, int>{
                 {"Value", 1}
             }),
-            new Item(1,"FireNode", "", new Dictionary<string, int>{
+            new Item(1,"FireNode", "gem", new Dictionary<string, int>{
 
                 {"Power", 3}
             }),
-            new Item(2,"WaterNode", "", new Dictionary<string, int>{
+            new Item(2,"WaterNode", "gem", new Dictionary<string, int>{
 
                 {"Power", 1}, {"Range", 1}
             }),
-            new Item(3,"NatureNode", "", new Dictionary<string, int>{
+            new Item(3,"NatureNode", "gem", new Dictionary<string, int>{
 
                 {"Power", 1}, {"Projectiles", 1}
+            }),
+            new Item(4,"wizardhat", "hat", new Dictionary<string, int>{
+
+                
+            }),
+            new Item(5,"wizardrobe", "robe", new Dictionary<string, int>{
+
+                
             }),
 
 

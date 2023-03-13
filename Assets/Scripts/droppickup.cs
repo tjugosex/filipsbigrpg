@@ -24,7 +24,7 @@ public class droppickup : MonoBehaviour
         if (playerInRange)
         {
             bool hasMissingImage = false;
-            for (int i = 3; i <= 18; i++)
+            for (int i = 5; i <= 20; i++)
             {
                 string objectName = "Item" + i;
                 GameObject item = GameObject.Find(objectName);

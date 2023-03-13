@@ -17,6 +17,8 @@ public class Inventory : MonoBehaviour
         GiveStartItem(1);
         GiveStartItem(1);
         GiveStartItem(2);
+        GiveStartItem(5);
+        GiveStartItem(4);
     }
 
 

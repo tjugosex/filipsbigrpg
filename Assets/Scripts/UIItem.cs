@@ -31,7 +31,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
         else
         {
             spriteImage.color = Color.clear;
-            
+
         }
 
 
@@ -65,6 +65,18 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
                         return;
                     }
                 }
+
+                if (selectedItem.item.description != "robe" && prefabName == "Item3")
+                {
+                    Debug.Log("wut");
+                    return;
+                }
+                if (selectedItem.item.description != "hat" && prefabName == "Item4")
+                {
+                    Debug.Log("wut");
+                    return;
+                }
+
             }
 
             if (this.item != null)
@@ -82,7 +94,21 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
                             Debug.Log("wut");
                             return;
                         }
+                        if (selectedItem.item.description == "hat" && prefabName == "Item" + i)
+                        {
+                            Debug.Log("wut");
+                            return;
+                        }
+                        if (selectedItem.item.description == "robe" && prefabName == "Item" + i)
+                        {
+                            Debug.Log("wut");
+                            return;
+                        }
+
                     }
+
+
+
 
                     Item clone = new Item(selectedItem.item);
                     selectedItem.UpdateItem(this.item);
