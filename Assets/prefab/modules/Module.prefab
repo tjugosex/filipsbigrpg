@@ -46,9 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  Unwanted: 02000000
-  Positions:
-  - {x: 1, y: 0}
+  Unwanted: 
+  Positions: []
 --- !u!1 &3803410229092159632
 GameObject:
   m_ObjectHideFlags: 0
