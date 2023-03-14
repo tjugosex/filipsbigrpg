@@ -10,13 +10,17 @@ public class shooting : MonoBehaviour
     public float projectileSpeed = 10f;
     bool invOpen;
     private Inventory inventory;
-    
-    private int power = 1;
-    private int projectilesnmbr = 1;
-    private float[] degrees = new float [7]{0,10,-10,20,-20,30,-30};
+
+    private int[] power = new int[3] { 0, 0, 0 };
+    private int[] projectilesnmbr = new int[3] { 0, 0, 0 };
+    private float[] degrees = new float[7] { 0, 10, -10, 20, -20, 30, -30 };
     private float cooldown = 1.0f;
     private float cooldownTimer = 0.0f;
-    private int range = 0;
+    private int[] range = new int[3] { 0, 0, 0 };
+
+    public int powerTot;
+    public int projectilesnmbrTot;
+    public int rangeTot;
     private void Start()
     {
         invOpen = false;
@@ -76,11 +80,6 @@ public class shooting : MonoBehaviour
             return false;
         }
 
-    }
-
-    void ShootProjectile(Vector3 direction)
-    {
-
         for (int i = 0; i < 3; i++)
         {
             string gameObjectName = "slot" + i;
@@ -96,41 +95,57 @@ public class shooting : MonoBehaviour
                     Item item = inventory.CheckForItem(spriteName); // Use the CheckForItem method to get the corresponding Item
                     if (item != null && uiItem.GetComponentInChildren<Image>().color != Color.clear)
                     {
-                        Debug.Log(gameObjectName + " has power: ");
+
                         foreach (KeyValuePair<string, int> kvp in item.stats)
                         {
-                            Debug.Log(kvp.Key + ": " + kvp.Value);
+
                             if (kvp.Key == "Power")
                             {
-                                power += kvp.Value;
+                                power[i] = kvp.Value;
                             }
+
+
                             if (kvp.Key == "Range")
                             {
-                                range += kvp.Value;
+                                range[i] = kvp.Value;
                             }
+
                             if (kvp.Key == "Projectiles")
                             {
-                                projectilesnmbr += kvp.Value;
+                                projectilesnmbr[i] = kvp.Value;
                             }
+
                         }
 
                     }
                     else
                     {
-                        Debug.Log(gameObjectName + " sprite name does not correspond to any Item in the Inventory.");
+                        power[i] = 0;
+                        range[i] = 0;
+                        projectilesnmbr[i] = 0;
+                        //Debug.Log(gameObjectName + " sprite name does not correspond to any Item in the Inventory.");
                     }
                 }
                 else
                 {
-                    Debug.Log(gameObjectName + " does not have a UIItem component or a sprite assigned.");
+                    // Debug.Log(gameObjectName + " does not have a UIItem component or a sprite assigned.");
                 }
             }
             else
             {
-                Debug.Log(gameObjectName + " not found.");
+                // Debug.Log(gameObjectName + " not found.");
             }
         }
-        for (int i = 0; i < projectilesnmbr; i++)
+        powerTot = power[0] + power[1] + power[2];
+        rangeTot = range[0] + range[1] + range[2];
+        projectilesnmbrTot = projectilesnmbr[0] + projectilesnmbr[1] + projectilesnmbr[2] + 1;
+    }
+
+    void ShootProjectile(Vector3 direction)
+    {
+
+
+        for (int i = 0; i < projectilesnmbrTot; i++)
         {
             GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
             projectile.transform.parent = this.transform;
@@ -144,16 +159,16 @@ public class shooting : MonoBehaviour
             // Set the velocity of the projectile
             Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
 
-            projectile.GetComponent<Projectile>().duration += range;
+            projectile.GetComponent<Projectile>().duration += rangeTot;
+            projectile.GetComponent<projectiledamage>().damage += powerTot;
 
             Vector2 rotatedDirection = Quaternion.Euler(0, 0, degrees[i]) * direction;
             rb.velocity = rotatedDirection * projectileSpeed;
 
         }
-        Debug.Log("total power: " + power);
-        Debug.Log("total range: " + range);
-        power = 1;
-        range = 0;
-        projectilesnmbr = 1;
+        Debug.Log("total added power: " + powerTot);
+        Debug.Log("total added range: " + rangeTot);
+
+
     }
 }
