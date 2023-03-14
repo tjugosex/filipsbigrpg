@@ -22,20 +22,13 @@ public class modulespawner : MonoBehaviour
 
     public Vector2 Test;
 
+    public GameObject path;
+
     List<GameObject> tempModules;
     private void Start()
     {
+        //ChangeTileInfoToPoint(path, new Vector2(100, 100));
 
-
-        List<int> temp = new List<int>();
-        temp.Add(1);
-        temp.Add(2);
-        temp.Add(0);
-        ChangeTileInfoToPoint(temp, new Vector2(-50,100));
-
-        //Vector2 from = new Vector2(5,5);
-        //Vector2 to = new Vector2(50,50);
-        //ChangeTileInfoInArea(temp, from, to);
     }
     private void Update()
     {
@@ -92,17 +85,24 @@ public class modulespawner : MonoBehaviour
                         Debug.Log("shit");
                         tempModules = new List<GameObject>{modul};
                     }
+
+
+
                     //Gör modulen och sätter position
                     GameObject mod = Instantiate(tempModules[Random.Range(0, tempModules.Count)]);
 
-                    mod.transform.position = new Vector3(x * 10, y * 10, 0f);
-                    mod.transform.parent = this.transform;
-                    TilesSet.Add(new Vector2(x, y), true);
-                    //Ändrar nästkommande information om tiles
-                    ChangeTileInfo(mod.GetComponent<ModuleInfo>(), new Vector2(x, y));
+                    SetTile(mod, new Vector3(x,y,0f));
                 }
             }
         }
+    }
+    void SetTile(GameObject mod, Vector3 pos)
+    {
+        mod.transform.position = new Vector3(pos.x * 10, pos.y * 10, 0f);
+        mod.transform.parent = this.transform;
+        TilesSet.Add(new Vector2(pos.x, pos.y), true);
+        //Ändrar nästkommande information om tiles
+        ChangeTileInfo(mod.GetComponent<ModuleInfo>(), new Vector2(pos.x, pos.y));
     }
     void ChangeTileInfo(ModuleInfo info, Vector2 position)
     {
@@ -124,7 +124,6 @@ public class modulespawner : MonoBehaviour
                     }
                     else
                     {
-
                         TileInfo _tileInfo = new TileInfo();
                         _tileInfo.objs.Add(objcts[i]);
                         Tiles.Add(pos[k] + position, _tileInfo);
@@ -166,8 +165,13 @@ public class modulespawner : MonoBehaviour
             }
         }
     }
-    void ChangeTileInfoToPoint(List<int> UnWantedIds, Vector2 to)
+
+
+
+    void ChangeTileInfoToPoint(GameObject mod, Vector2 to)
     {
+        ModuleInfo info = mod.GetComponent<ModuleInfo>();
+        //List<int> UnWantedIds = new List<int>(info.Unwanted);
         float k = to.y / to.x;
         float y;
         for (int x = 0; x < Mathf.Abs(to.x); x++)
@@ -180,22 +184,46 @@ public class modulespawner : MonoBehaviour
 
             if (!bol)
             {
-                for (int i = 0; i < UnWantedIds.Count; i++)
-                {
-                    if (Tiles.TryGetValue(pos, out TileInfo _info))
-                    {
-                        _info.objs.Add(UnWantedIds[i]);
-                        Tiles.Remove(pos);
-                        Tiles.Add(pos, _info);
-                    }
-                    else
-                    {
+                GameObject dule = Instantiate(mod);
+                ChangeTileInfo(info, pos);
+                SetTile(dule, pos);
+                //for (int i = 0; i < UnWantedIds.Count; i++)
+                //{
+                //    //if (Tiles.TryGetValue(pos, out TileInfo _info))
+                //    //{
+                //    //    _info.objs.Add(UnWantedIds[i]);
+                //    //    Tiles.Remove(pos);
+                //    //    Tiles.Add(pos, _info);
+                //    //}
+                //    //else
+                //    //{
 
-                        TileInfo _tileInfo = new TileInfo();
-                        _tileInfo.objs.Add(UnWantedIds[i]);
-                        Tiles.Add(pos, _tileInfo);
-                    }
-                }
+                //    //    TileInfo _tileInfo = new TileInfo();
+                //    //    _tileInfo.objs.Add(UnWantedIds[i]);
+                //    //    Tiles.Add(pos, _tileInfo);
+                //    //}
+
+                //}
+            }
+        }
+    }
+    void ChangeTileInfoFunction(GameObject mod)
+    {
+        ModuleInfo info = mod.GetComponent<ModuleInfo>();
+        float y;
+        for (int x = 0; x < 100; x++)
+        {
+
+            y = Mathf.Sin(x) * 3f;
+            y = (int)y;
+            Vector2 pos = new Vector2(x, y);
+            TilesSet.TryGetValue(pos, out bool bol);
+
+            if (!bol)
+            {
+                GameObject dule = Instantiate(mod);
+                ChangeTileInfo(info, pos);
+                SetTile(dule, pos);
             }
         }
     }
