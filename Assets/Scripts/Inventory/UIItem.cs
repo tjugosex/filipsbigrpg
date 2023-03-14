@@ -59,7 +59,7 @@ public class UIItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    if (selectedItem.item.title == "Coin" && prefabName == "Item" + i)
+                    if (selectedItem.item.description != "gem" && prefabName == "Item" + i)
                     {
                         Debug.Log("wut");
                         return;
