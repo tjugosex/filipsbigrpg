@@ -20,10 +20,11 @@ public class CameraScript : MonoBehaviour
         mousePosition.z = -20;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        // Calculate the midpoint between the player and mouse positions
-        Vector3 midpoint = (mousePosition + playerPosition) / 2;
+        // Calculate the maximum distance the camera can move in the x direction
+        float maxDistanceX = Mathf.Abs(playerPosition.y - Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).y);
 
-      
+        // Calculate the midpoint between the player and mouse positions, limited by the maximum distance in the x direction
+        Vector3 midpoint = new Vector3(Mathf.Clamp((mousePosition.x + playerPosition.x) / 2, playerPosition.x - maxDistanceX, playerPosition.x + maxDistanceX), (mousePosition.y + playerPosition.y) / 2, mousePosition.z);
 
         // Move the camera towards the midpoint position
         transform.position = Vector3.Lerp(transform.position, midpoint / 2, cameraSpeed);

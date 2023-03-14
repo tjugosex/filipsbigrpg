@@ -7,6 +7,8 @@ TagManager:
   - enemyprojectile
   - projectile
   - enemy
+  - gobline
+  - goblineking
   layers:
   - Default
   - TransparentFX
