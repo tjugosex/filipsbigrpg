@@ -1768,6 +1768,10 @@ PrefabInstance:
       value: goblineKing
       objectReference: {fileID: 0}
     - target: {fileID: 2285578535555219862, guid: 8e7758f391ab4374f8d39e4e7a8c3192, type: 3}
+      propertyPath: range
+      value: 19.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285578535555219862, guid: 8e7758f391ab4374f8d39e4e7a8c3192, type: 3}
       propertyPath: pointOffset
       value: 5
       objectReference: {fileID: 0}
@@ -1821,7 +1825,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4007748093777581091, guid: 8e7758f391ab4374f8d39e4e7a8c3192, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007748093777581091, guid: 8e7758f391ab4374f8d39e4e7a8c3192, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e7758f391ab4374f8d39e4e7a8c3192, type: 3}

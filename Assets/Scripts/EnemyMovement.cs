@@ -54,18 +54,27 @@ public class EnemyMovement : MonoBehaviour
 
                     foreach (GameObject goblin in goblins)
                     {
-                        // Check if the goblin is within the detection radius
-                        if (Vector3.Distance(goblin.transform.position, transform.position) <= detectionRadius)
+                        if (goblin != null)
                         {
-                            // Get the EnemyMovement script attached to the goblin object
                             EnemyMovement enemyMovement = goblin.GetComponent<EnemyMovement>();
+                            // Check if the goblin is within the detection radius
+                            if (Vector3.Distance(goblin.transform.position, transform.position) <= detectionRadius)
+                            {
+                                // Get the EnemyMovement script attached to the goblin object
 
-                            // Calculate the point between the goblin and the target object
-                            Vector2 targetPoint = new Vector2(transform.position.x, transform.position.y) + ((Vector2)(targetTransform.position - transform.position).normalized * pointOffset);
 
-                            // Set the goblin's direction to point towards the target point
-                            enemyMovement.direction = (targetPoint - (Vector2)goblin.transform.position).normalized;
+                                // Calculate the point between the goblin and the target object
+                                Vector2 targetPoint = new Vector2(transform.position.x, transform.position.y) + ((Vector2)(targetTransform.position - transform.position).normalized * pointOffset);
+
+                                // Set the goblin's direction to point towards the target point
+                                enemyMovement.direction = (targetPoint - (Vector2)goblin.transform.position).normalized;
+                            }
+                            else
+                            {
+                                enemyMovement.direction = Vector2.zero;
+                            }
                         }
+
                     }
 
                 }
