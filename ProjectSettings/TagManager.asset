@@ -9,6 +9,7 @@ TagManager:
   - enemy
   - gobline
   - goblineking
+  - GridObject
   layers:
   - Default
   - TransparentFX
