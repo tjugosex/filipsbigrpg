@@ -209,7 +209,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &6916009305885312858
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -240,6 +240,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 7308324816863756662, guid: f1d34cdb27a6e1d4cb0141bdeb671dbf, type: 3}
   projectileSpeed: 9.72
+  powerTot: 0
+  projectilesnmbrTot: 0
+  rangeTot: 0
 --- !u!114 &1268716948606227198
 MonoBehaviour:
   m_ObjectHideFlags: 0
