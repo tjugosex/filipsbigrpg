@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridSize: 1
   legal: 0
-  end: 0
+  nr: 0
 --- !u!61 &7896761990514781680
 BoxCollider2D:
   m_ObjectHideFlags: 0

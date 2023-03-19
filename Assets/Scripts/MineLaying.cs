@@ -42,15 +42,15 @@ public class MineLaying : MonoBehaviour
         }
         if (Input.GetMouseButton(1) && active)
         {
-           
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
 
-            
+
             if (hit.collider != null && hit.collider.CompareTag("GridObject"))
             {
                 clickedObject = hit.collider.gameObject;
-                
+
                 if (clickedObject.GetComponent<GridSnap>().nr == 1)
                 {
                     GameObject[] gridObjects = GameObject.FindGameObjectsWithTag("GridObject");

@@ -9,7 +9,7 @@ public class GridSnap : MonoBehaviour
 
  
 
-    public float nr = 0;
+    public float nr = 1;
     float neighboorsint = 0;
 
     void Awake()
