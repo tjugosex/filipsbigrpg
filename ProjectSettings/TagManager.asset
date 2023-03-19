@@ -7,14 +7,12 @@ TagManager:
   - enemyprojectile
   - projectile
   - enemy
-  - gobline
-  - goblineking
   - GridObject
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - GridObject
   - Water
   - UI
   - 

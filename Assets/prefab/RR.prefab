@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 8217331837433631811}
   - component: {fileID: -8642317968613343967}
   - component: {fileID: -7201117306901683587}
-  - component: {fileID: -301686215076320578}
   - component: {fileID: 7896761990514781680}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RR
   m_TagString: GridObject
   m_Icon: {fileID: 0}
@@ -101,18 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridSize: 1
   legal: 0
---- !u!156049354 &-301686215076320578
-Grid:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7099752630434798270}
-  m_Enabled: 1
-  m_CellSize: {x: 100, y: 100, z: 1}
-  m_CellGap: {x: 0, y: 0, z: 0}
-  m_CellLayout: 0
-  m_CellSwizzle: 0
+  end: 0
 --- !u!61 &7896761990514781680
 BoxCollider2D:
   m_ObjectHideFlags: 0

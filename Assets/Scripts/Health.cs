@@ -35,23 +35,23 @@ public class Health : MonoBehaviour
             // Destroy the spjut object
             Destroy(collision.gameObject);
         }
-        if (collision.CompareTag("projectile") && this.CompareTag("gobline"))
-        {
+        // if (collision.CompareTag("projectile") && this.CompareTag("gobline"))
+        // {
             
             
-            healthPoints -= collision.GetComponent<projectiledamage>().damage;
-            Debug.Log(healthPoints);
-            // Destroy the spjut object
-            Destroy(collision.gameObject);
-        }
-        if (collision.CompareTag("projectile") && this.CompareTag("goblineking"))
-        {
+        //     healthPoints -= collision.GetComponent<projectiledamage>().damage;
+        //     Debug.Log(healthPoints);
+        //     // Destroy the spjut object
+        //     Destroy(collision.gameObject);
+        // }
+        // if (collision.CompareTag("projectile") && this.CompareTag("goblineking"))
+        // {
             
             
-            healthPoints -= collision.GetComponent<projectiledamage>().damage;
-            Debug.Log(healthPoints);
-            // Destroy the spjut object
-            Destroy(collision.gameObject);
-        }
+        //     healthPoints -= collision.GetComponent<projectiledamage>().damage;
+        //     Debug.Log(healthPoints);
+        //     // Destroy the spjut object
+        //     Destroy(collision.gameObject);
+        // }
     }
 }

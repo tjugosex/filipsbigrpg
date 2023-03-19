@@ -6,14 +6,14 @@ public class MineLaying : MonoBehaviour
 {
     GameObject mineTT;
     public GameObject RRpref;
-
+    public GameObject clickedObject;
     bool active = false;
 
     void Start()
     {
         // Find the game object with name "mineTT"
         mineTT = transform.Find("mineTT").gameObject;
-        
+
     }
 
     void Update()
@@ -27,11 +27,42 @@ public class MineLaying : MonoBehaviour
         }
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0) && active)
+        if (Input.GetMouseButton(0) && active)
         {
-            GameObject Railroadpref = Instantiate(RRpref, new Vector3(mousePos.x, mousePos.y, 0f), Quaternion.identity);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+            // Check if the ray hits a game object with the GridObject tag
+            if (hit.collider == null)
+            {
+                // If there is no collider with the GridObject tag, instantiate the object
+                GameObject Railroadpref = Instantiate(RRpref, new Vector3(mousePos.x, mousePos.y, 0f), Quaternion.identity);
+            }
+
+        }
+        if (Input.GetMouseButton(1) && active)
+        {
+           
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
 
             
+            if (hit.collider != null && hit.collider.CompareTag("GridObject"))
+            {
+                clickedObject = hit.collider.gameObject;
+                
+                if (clickedObject.GetComponent<GridSnap>().nr == 1)
+                {
+                    GameObject[] gridObjects = GameObject.FindGameObjectsWithTag("GridObject");
+
+                    foreach (GameObject rr in gridObjects)
+                    {
+                        rr.GetComponent<GridSnap>().nr--;
+                    }
+                    Destroy(clickedObject);
+                }
+
+            }
         }
     }
 }
