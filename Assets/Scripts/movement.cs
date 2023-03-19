@@ -14,6 +14,9 @@ public class movement : MonoBehaviour
     public float speed = 10f;
     public float runSpeed = 20.0f;
     bool RailInRange = false;
+    float railnr;
+    GameObject[] gridObjects;
+    bool fwd;
 
     void Start()
     {
@@ -23,8 +26,9 @@ public class movement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if the collision was with the player object
-        if (collision.CompareTag("GridObject") && collision.GetComponent<GridSnap>().nr == 1)
+        if (collision.CompareTag("GridObject"))
         {
+            railnr = collision.GetComponent<GridSnap>().nr;
             // Set playerInRange to true
             RailInRange = true;
         }
@@ -46,6 +50,13 @@ public class movement : MonoBehaviour
         {
             horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
             vertical = Input.GetAxisRaw("Vertical"); // -1 is down
+            GameObject firstChild = this.transform.GetChild(4).gameObject;
+            firstChild.SetActive(false);
+        }
+        if (railriding)
+        {
+            GameObject firstChild = this.transform.GetChild(4).gameObject;
+            firstChild.SetActive(true);
         }
 
 
@@ -61,6 +72,8 @@ public class movement : MonoBehaviour
             }
 
         }
+
+
     }
 
     void FixedUpdate()
@@ -79,28 +92,27 @@ public class movement : MonoBehaviour
 
     IEnumerator cartriding()
     {
-        GameObject[] gridObjects = GameObject.FindGameObjectsWithTag("GridObject");
-
-
+        gridObjects = GameObject.FindGameObjectsWithTag("GridObject");
         Array.Sort(gridObjects, (x, y) => x.GetComponent<GridSnap>().nr.CompareTo(y.GetComponent<GridSnap>().nr));
-
 
         foreach (GameObject rr in gridObjects)
         {
 
-
-            direction = (rr.transform.position - transform.position).normalized;
-            transform.position += direction * speed * Time.deltaTime;
-
-
-            while ((Vector3.Distance(transform.position, rr.transform.position) > 0.1f) && (railriding))
+            if (railnr < rr.GetComponent<GridSnap>().nr)
             {
-                Debug.Log(rr.GetComponent<GridSnap>().nr);
-                yield return null;
+                direction = (rr.transform.position - transform.position).normalized;
+                transform.position += direction * speed * Time.deltaTime;
+
+
+                while ((Vector3.Distance(transform.position, rr.transform.position) > 0.1f) && (railriding))
+                {
+                    Debug.Log(rr.GetComponent<GridSnap>().nr);
+                    yield return null;
+                }
+
+
+                direction = Vector3.zero;
             }
-
-
-            direction = Vector3.zero;
 
         }
 
