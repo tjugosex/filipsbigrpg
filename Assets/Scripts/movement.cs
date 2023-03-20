@@ -36,7 +36,7 @@ public class movement : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         // Check if the collision was with the player object
-        if (collision.CompareTag("GridObject") && collision.GetComponent<GridSnap>().nr == 1)
+        if (collision.CompareTag("GridObject"))
         {
             // Set playerInRange to true
             RailInRange = false;
@@ -63,7 +63,7 @@ public class movement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             railriding = !railriding;
-            body.velocity = new Vector2(0, 0);
+            //body.velocity = new Vector2(0, 0);
             if (RailInRange && railriding)
             {
 

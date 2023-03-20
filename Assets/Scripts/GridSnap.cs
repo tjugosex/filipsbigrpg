@@ -37,8 +37,11 @@ public class GridSnap : MonoBehaviour
             {
                 continue;
             }
+            else
+            {
+                neighborCount++;
+            }
 
-            neighborCount++;
         }
 
         Vector2 size = new Vector2(gridSize * 0.5f, gridSize * 0.5f);
@@ -59,10 +62,11 @@ public class GridSnap : MonoBehaviour
             {
                 continue;
 
+
             }
 
             // Do something with the neighboring grid object
-            if (neighbor.GetComponent<GridSnap>().nr == 1)
+            else if (neighbor.GetComponent<GridSnap>().nr == 1)
             {
                 if (neighborCount >= 3)
                 {
