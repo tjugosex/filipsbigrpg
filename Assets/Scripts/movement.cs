@@ -50,13 +50,13 @@ public class movement : MonoBehaviour
         {
             horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
             vertical = Input.GetAxisRaw("Vertical"); // -1 is down
-            GameObject firstChild = this.transform.GetChild(4).gameObject;
-            firstChild.SetActive(false);
+            
+            
         }
         if (railriding)
         {
-            GameObject firstChild = this.transform.GetChild(4).gameObject;
-            firstChild.SetActive(true);
+            
+           
         }
 
 
