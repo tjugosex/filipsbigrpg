@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PerlinNoiseGen : MonoBehaviour
 {
-    [SerializeField]private int width;
+    [SerializeField] private int width;
 
-    [SerializeField]private int height;
+    [SerializeField] private int height;
 
     public Dictionary<Vector2, bool> TilesSet = new Dictionary<Vector2, bool>();
 
@@ -33,6 +33,15 @@ public class PerlinNoiseGen : MonoBehaviour
             }
         }
         randPos = new Vector2(Random.Range(1000, 100000), Random.Range(1000, 100000)); ;
+        GameObject playerObject = GameObject.FindWithTag("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
+        else
+        {
+            Debug.LogWarning("Player object with tag 'Player' not found");
+        }
     }
 
     private void Update()
@@ -42,11 +51,11 @@ public class PerlinNoiseGen : MonoBehaviour
     }
     void RenderGeneration()
     {
-        currentPos = new Vector2Int(Mathf.FloorToInt(player.position.x+ 1), Mathf.FloorToInt(player.position.y+ 1));
+        currentPos = new Vector2Int(Mathf.FloorToInt(player.position.x + 1), Mathf.FloorToInt(player.position.y + 1));
 
         for (int y = (int)currentPos.y - RenderDistance; y <= (int)currentPos.y + RenderDistance; y++)
         {
-            for (int x = (int)currentPos.x - RenderDistance; x <= (int)currentPos.x + RenderDistance; x++) 
+            for (int x = (int)currentPos.x - RenderDistance; x <= (int)currentPos.x + RenderDistance; x++)
             {
                 if (!TilesSet.TryGetValue(new Vector2(x, y), out bool bol))
                 {
@@ -63,7 +72,7 @@ public class PerlinNoiseGen : MonoBehaviour
         {
             for (float x = 0; x < width; x++)
             {
-                
+
 
                 PlaceBlock(new Vector2(x, y));
             }
@@ -75,7 +84,7 @@ public class PerlinNoiseGen : MonoBehaviour
         GameObject blocc;
         if (value > 0.5f)
         {
-            blocc = Instantiate(blocks[0], pos, new Quaternion(0f,0f,0f,0f));
+            blocc = Instantiate(blocks[0], pos, new Quaternion(0f, 0f, 0f, 0f));
             blocc.transform.parent = gameObject.transform;
 
         }
